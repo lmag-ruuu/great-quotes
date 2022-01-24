@@ -94,7 +94,7 @@ const NavBar: FC = () => {
                 sx={{ my: 2, color: "#white", display: "block" }}
               >
                 <Link
-                  color="#fff"
+                  sx={{ color: "text.primary" }}
                   href={page === "All Quotes" ? "/" : "/add-quote"}
                 >
                   {page}

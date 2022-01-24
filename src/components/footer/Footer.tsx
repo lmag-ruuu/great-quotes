@@ -5,7 +5,13 @@ import Link from "../UI/Link";
 
 const Footer: FC = () => {
   return (
-    <Stack spacing={2} direction={"row"} alignSelf={"center"} mt={4}>
+    <Stack
+      direction="row"
+      justifyContent="center"
+      alignItems="center"
+      spacing={2}
+      mt={3}
+    >
       <Typography>See on</Typography>
       <Link href={"https://github.com/lmag-ruuu"}>
         <GitHubIcon />

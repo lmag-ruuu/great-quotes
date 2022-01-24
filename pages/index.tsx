@@ -1,12 +1,13 @@
 import type { NextPage } from "next";
 import { Stack, Typography, Divider } from "@mui/material";
 import QuoteList from "../src/components/quote/QuoteList";
+import HeaderCustom from "../src/components/UI/Header";
 
 export const DUMMY_QUOTES = [
   {
     id: "q1",
     author: "Isac El Guapos",
-    text: "Estoy hasta la puta madre de vivir en vzla, primera cita",
+    text: "Estoy hasta la puta madre de vivir en vzla",
   },
   {
     id: "q2",
@@ -28,7 +29,7 @@ export const DUMMY_QUOTES = [
 const Home: NextPage = () => {
   return (
     <Stack spacing={2} direction={"column"} mb={2}>
-      <Typography>Quote List</Typography>
+      <HeaderCustom>Quote List 📝</HeaderCustom>
       <Divider />
       <QuoteList QuoteList={DUMMY_QUOTES} />
     </Stack>

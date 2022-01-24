@@ -1,5 +1,6 @@
 import { FC } from "react";
 import QuoteItem from "./QuoteItem";
+import Grid from "@mui/material/Grid";
 
 type QuoteList = {
   id: string;
@@ -9,11 +10,20 @@ type QuoteList = {
 
 const QuoteList: FC<{ QuoteList: QuoteList }> = (props) => {
   return (
-    <>
+    <Grid
+      container
+      justifyContent={{
+        xs: "center",
+        sm: "center",
+        md: "center",
+        lg: "initial",
+      }}
+    >
       {props.QuoteList.map((quote) => {
-        return <QuoteItem Quote={quote} key={quote.id} />;
+        const selectColor = Math.floor(Math.random() * 13);
+        return <QuoteItem Quote={quote} key={quote.id} color={selectColor} />;
       })}
-    </>
+    </Grid>
   );
 };
 
