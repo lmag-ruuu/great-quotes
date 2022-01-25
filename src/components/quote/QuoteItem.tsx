@@ -32,9 +32,7 @@ const color = [
 const QuoteItem: FC<{ Quote: Quote; color: number }> = (props) => {
   return (
     <Grid item md={4} sm={6} pl={2} pr={2} pb={2} minWidth={"360px"}>
-      <Card
-        sx={{ pb: "6px", minWidth: 275, backgroundColor: color[props.color] }}
-      >
+      <Card sx={{ pb: "6px", minWidth: 275, bgcolor: color[props.color] }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Quote
