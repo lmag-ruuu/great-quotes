@@ -1,6 +1,8 @@
 import { createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 
+const col = Math.floor(Math.random() * 13);
+
 // Create a theme instance.
 const theme = createTheme({
   palette: {
@@ -18,7 +20,7 @@ const theme = createTheme({
       secondary: "#666",
     },
     background: {
-      paper: "#94d82d",
+      paper: "#e7f5ff",
     },
   },
 });
