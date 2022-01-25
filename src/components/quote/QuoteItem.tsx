@@ -13,26 +13,10 @@ type Quote = {
   author: string;
 };
 
-const color = [
-  "#dee2e6",
-  "#ffa8a8",
-  "#faa2c1",
-  "#e599f7",
-  "#b197fc",
-  "#91a7ff",
-  "#74c0fc",
-  "#66d9e8",
-  "#63e6be",
-  "#8ce99a",
-  "#c0eb75",
-  "#ffe066",
-  "#ffc078",
-];
-
 const QuoteItem: FC<{ Quote: Quote; color: number }> = (props) => {
   return (
     <Grid item md={4} sm={6} pl={2} pr={2} pb={2} minWidth={"360px"}>
-      <Card sx={{ pb: "6px", minWidth: 275, bgcolor: color[props.color] }}>
+      <Card sx={{ pb: "6px", minWidth: 275, bgcolor: "background.paper" }}>
         <CardContent>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Quote

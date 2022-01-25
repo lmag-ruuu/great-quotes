@@ -6,8 +6,7 @@ type Props = {
 };
 
 const Div = styled("div")(({ theme }) => ({
-  ...theme.typography.button,
-  backgroundColor: theme.palette.background.paper,
+  ...theme.typography.h4,
   padding: theme.spacing(1),
   textAlign: "center",
 }));
