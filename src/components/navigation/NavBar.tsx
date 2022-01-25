@@ -67,8 +67,15 @@ const NavBar: FC = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link href={page === "All Quotes" ? "/" : "add-quote"}>
+                <MenuItem
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ color: "text.primary" }}
+                >
+                  <Link
+                    href={page === "All Quotes" ? "/" : "add-quote"}
+                    sx={{ color: "text.primary" }}
+                  >
                     <Typography textAlign="center">{page}</Typography>
                   </Link>
                 </MenuItem>
@@ -89,6 +96,7 @@ const NavBar: FC = () => {
           >
             {pages.map((page) => (
               <Button
+                variant="text"
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "#white", display: "block" }}

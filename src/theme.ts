@@ -18,7 +18,7 @@ const theme = createTheme({
       secondary: "#666",
     },
     background: {
-      paper: "#74c0fc",
+      paper: "#94d82d",
     },
   },
 });
