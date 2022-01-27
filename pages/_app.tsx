@@ -3,8 +3,8 @@ import { AppProps } from "next/app";
 import { ThemeProvider } from "@mui/material/styles";
 import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
-import theme from "../src/theme";
-import createEmotionCache from "../src/createEmotionCache";
+import theme from "../src/materialConfig/theme";
+import createEmotionCache from "../src/materialConfig/createEmotionCache";
 import Layout from "../src/components/layout/Layout";
 
 // Client-side cache, shared for the whole session of the user in the browser.
