@@ -13,7 +13,7 @@ const Footer: FC = () => {
       mt={3}
     >
       <Typography>See on</Typography>
-      <Link href={"https://github.com/lmag-ruuu"}>
+      <Link href={"https://github.com/lmag-ruuu/great-quotes"}>
         <GitHubIcon />
       </Link>
     </Stack>
