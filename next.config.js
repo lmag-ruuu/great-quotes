@@ -2,8 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-    MONGODB_URI: process.env.MONGODB_URI,
+    API_URL: "http://localhost:3000/api/quotes",
+    MONGODB_URI:
+      "mongodb+srv://ruben:Gf0UD4JuZwp5Wtgb@cluster0.ejlc8.mongodb.net/quotesDB?retryWrites=true&w=majority",
   },
 };
 

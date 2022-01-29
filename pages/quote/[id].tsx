@@ -19,8 +19,8 @@ function QuoteDetail(props: QuoteDetailProp) {
       <Typography>
         Aqui va detalles del quote el texto seria {quote.text}
       </Typography>
-      {quote.comments.map((comment) => (
-        <Typography key={+comment}>comentario: {comment}</Typography>
+      {quote.comments.map((comment, index) => (
+        <Typography key={index}>comentario: {comment}</Typography>
       ))}
       <Typography>Y aqui para poner y enviar un comentario xd</Typography>
     </Stack>
@@ -29,13 +29,11 @@ function QuoteDetail(props: QuoteDetailProp) {
 
 export async function getServerSideProps(context: any) {
   // fetch the todo, the param was received via context.query.id
-  const res = await fetch(
-    process.env.NEXT_PUBLIC_API_URL + "/" + context.query.id
-  );
+  const res = await fetch(process.env.API_URL + "/" + context.query.id);
   const quote = await res.json();
 
   //return the serverSideProps the todo and the url from out env variables for frontend api calls
-  return { props: { quote, url: process.env.NEXT_PUBLIC_API_URL } };
+  return { props: { quote, url: process.env.API_URL } };
 }
 
 export default QuoteDetail;
