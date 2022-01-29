@@ -32,7 +32,7 @@ function QuoteItem(props: Quote) {
         <CardActions>
           <Link
             sx={{ ml: "40px", color: "#333", fontWeight: "bold" }}
-            href={"/quote-detail"}
+            href={`/quote/${props.quote._id}`}
           >
             Open
           </Link>
