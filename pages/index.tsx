@@ -1,4 +1,3 @@
-import type { NextPage } from "next";
 import { Stack, Divider } from "@mui/material";
 import QuoteList from "../src/components/quote/QuoteList";
 import HeaderCustom from "../src/components/UI/Header";
