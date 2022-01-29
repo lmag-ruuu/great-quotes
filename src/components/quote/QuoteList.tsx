@@ -1,14 +1,13 @@
 import { FC } from "react";
 import QuoteItem from "./QuoteItem";
 import Grid from "@mui/material/Grid";
+import { quote } from "../../../utils/types";
 
-type QuoteList = {
-  id: string;
-  author: string;
-  text: string;
-}[];
+interface quoteList {
+  quotes: Array<quote>;
+}
 
-const QuoteList: FC<{ QuoteList: QuoteList }> = (props) => {
+function QuoteList(props: quoteList) {
   return (
     <Grid
       container
@@ -19,12 +18,12 @@ const QuoteList: FC<{ QuoteList: QuoteList }> = (props) => {
         lg: "initial",
       }}
     >
-      {props.QuoteList.map((quote) => {
+      {props.quotes.map((quote) => {
         const selectColor = Math.floor(Math.random() * 13);
-        return <QuoteItem Quote={quote} key={quote.id} color={selectColor} />;
+        return <QuoteItem quote={quote} key={quote._id} />;
       })}
     </Grid>
   );
-};
+}
 
 export default QuoteList;

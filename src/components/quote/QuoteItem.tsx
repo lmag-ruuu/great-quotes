@@ -4,16 +4,14 @@ import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Link from "../UI/Link";
+import { quote } from "../../../utils/types";
 
-type Quote = {
-  id: string;
-  text: string;
-  author: string;
-};
+interface Quote {
+  quote: quote;
+}
 
-const QuoteItem: FC<{ Quote: Quote; color: number }> = (props) => {
+function QuoteItem(props: Quote) {
   return (
     <Grid item md={4} sm={6} pl={2} pr={2} pb={2} minWidth={"360px"}>
       <Card sx={{ pb: "6px", minWidth: 275, bgcolor: "background.paper" }}>
@@ -22,13 +20,13 @@ const QuoteItem: FC<{ Quote: Quote; color: number }> = (props) => {
             Quote
           </Typography>
           <Typography variant="h5" component="div">
-            {props.Quote.author}
+            {props.quote.author}
           </Typography>
           <Typography sx={{ mb: 1.5 }} color="text.secondary">
             Author
           </Typography>
           <Typography variant="body2" color="text.primary" fontWeight={"bold"}>
-            <i>&quot;{props.Quote.text}&quot;</i>
+            <i>&quot;{props.quote.text}&quot;</i>
           </Typography>
         </CardContent>
         <CardActions>
@@ -42,6 +40,6 @@ const QuoteItem: FC<{ Quote: Quote; color: number }> = (props) => {
       </Card>
     </Grid>
   );
-};
+}
 
 export default QuoteItem;
