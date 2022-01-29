@@ -19,5 +19,15 @@ function Home(props: HomeProps) {
     </Stack>
   );
 }
+export async function getServerSideProps() {
+  // get todo data from API
+  const res = await fetch(process.env.API_URL as string);
+  const quotes = await res.json();
+
+  // return props
+  return {
+    props: { quotes },
+  };
+}
 
 export default Home;
