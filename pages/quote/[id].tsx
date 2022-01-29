@@ -7,9 +7,11 @@ import Paper from "@mui/material/Paper";
 import SendIcon from "@mui/icons-material/Send";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
+import mongoDB, { MongoClient, ObjectId } from "mongodb";
 
 interface QuoteDetailProp {
   quote: quote;
+  findedQuote: quote;
 }
 
 function QuoteDetail(props: QuoteDetailProp) {
@@ -106,12 +108,37 @@ function QuoteDetail(props: QuoteDetailProp) {
 }
 
 export async function getServerSideProps(context: any) {
-  // fetch the todo, the param was received via context.query.id
-  const res = await fetch(process.env.API_URL + "/" + context.query.id);
-  const quote = await res.json();
+  const quoteId = context.query.id;
+  // get todo data from API
+  const url = process.env.MONGODB_URI ? process.env.MONGODB_URI : "";
+  const client = new MongoClient(url);
+  const quotes: Array<quote> = [];
+  let finded: quote;
 
-  //return the serverSideProps the todo and the url from out env variables for frontend api calls
-  return { props: { quote } };
+  try {
+    await client.connect();
+    const db: mongoDB.Db = client.db("quotesDB");
+    const quotesCollection: mongoDB.Collection = db.collection("quotes");
+    const results = await quotesCollection.find().toArray();
+
+    results.forEach((result) =>
+      quotes.push({
+        author: result.author,
+        text: result.text,
+        _id: result._id.toString(),
+        comments: result.comments,
+      })
+    );
+  } finally {
+    await client.close();
+  }
+
+  const quote = quotes.find((quote) => quote._id === quoteId.toString());
+
+  // return props
+  return {
+    props: { quote },
+  };
 }
 
 export default QuoteDetail;
