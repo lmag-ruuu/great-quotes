@@ -2,6 +2,7 @@ import { Stack, Divider } from "@mui/material";
 import QuoteList from "../src/components/quote/QuoteList";
 import HeaderCustom from "../src/components/UI/Header";
 import { quote } from "../utils/types";
+import mongoDB, { MongoClient } from "mongodb";
 
 interface HomeProps {
   quotes: Array<quote>;
@@ -20,9 +21,28 @@ function Home(props: HomeProps) {
 }
 export async function getServerSideProps() {
   // get todo data from API
-  const url = `${process.env.API_URL}/quotes`;
-  const res = await fetch(url);
-  const quotes = await res.json();
+  const url =
+    "mongodb+srv://ruben:Gf0UD4JuZwp5Wtgb@cluster0.ejlc8.mongodb.net/quotesDB?retryWrites=true&w=majority";
+  const client = new MongoClient(url);
+  const quotes: Array<quote> = [];
+
+  try {
+    await client.connect();
+    const db: mongoDB.Db = client.db("quotesDB");
+    const quotesCollection: mongoDB.Collection = db.collection("quotes");
+    const results = await quotesCollection.find().toArray();
+
+    results.forEach((result) =>
+      quotes.push({
+        author: result.author,
+        text: result.text,
+        _id: result._id.toString(),
+        comments: result.comments,
+      })
+    );
+  } finally {
+    await client.close();
+  }
 
   // return props
   return {

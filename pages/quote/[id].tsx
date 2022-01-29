@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEventHandler, useRef } from "react";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -10,11 +10,37 @@ import IconButton from "@mui/material/IconButton";
 
 interface QuoteDetailProp {
   quote: quote;
-  url: string;
 }
 
 function QuoteDetail(props: QuoteDetailProp) {
   const [quote, setQuote] = useState<quote>(props.quote);
+  const commentRef = useRef<HTMLInputElement>(null);
+
+  //function for add comment
+  const addComment: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
+
+    //create new comment
+    if (commentRef.current) {
+      let newQuote: quote = {
+        ...quote,
+        comments: quote.comments.concat(commentRef.current.value),
+      };
+
+      await fetch(`/api/${quote._id}`, {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // send copy of todo with property
+        body: JSON.stringify(newQuote),
+      });
+
+      setQuote(newQuote);
+
+      commentRef.current.value = "";
+    }
+  };
 
   return (
     <Stack spacing={2} direction={"column"} mb={2}>
@@ -56,6 +82,7 @@ function QuoteDetail(props: QuoteDetailProp) {
         ))}
         <Paper
           component="form"
+          onSubmit={addComment}
           sx={{
             p: "2px 4px",
             display: "flex",
@@ -67,6 +94,7 @@ function QuoteDetail(props: QuoteDetailProp) {
             sx={{ ml: 1, flex: 1 }}
             placeholder="add comment"
             inputProps={{ "aria-label": "add comment" }}
+            inputRef={commentRef}
           />
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
             <SendIcon />
@@ -83,7 +111,7 @@ export async function getServerSideProps(context: any) {
   const quote = await res.json();
 
   //return the serverSideProps the todo and the url from out env variables for frontend api calls
-  return { props: { quote, url: process.env.API_URL } };
+  return { props: { quote } };
 }
 
 export default QuoteDetail;
