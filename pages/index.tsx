@@ -1,4 +1,3 @@
-import type { NextPage } from "next";
 import { Stack, Divider } from "@mui/material";
 import QuoteList from "../src/components/quote/QuoteList";
 import HeaderCustom from "../src/components/UI/Header";
@@ -21,7 +20,7 @@ function Home(props: HomeProps) {
 }
 export async function getServerSideProps() {
   // get todo data from API
-  const res = await fetch("api/quotes");
+  const res = await fetch(process.env.NEXT_PUBLIC_API_URL as string);
   const quotes = await res.json();
 
   // return props
