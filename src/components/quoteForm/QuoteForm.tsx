@@ -5,8 +5,6 @@ import TextField from "@mui/material/TextField";
 import { FC, useRef, useState } from "react";
 
 const Form: FC = () => {
-  const [isEnteringData, setIsEnteringData] = useState(false);
-
   const authorRef = useRef<HTMLFormElement | null>(null);
   const textRef = useRef<HTMLFormElement | null>(null);
 
