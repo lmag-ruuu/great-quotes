@@ -29,7 +29,7 @@ function QuoteDetail(props: QuoteDetailProp) {
         comments: quote.comments.concat(commentRef.current.value),
       };
 
-      await fetch(`/api/${quote._id}`, {
+      const response = await fetch(`/api/${quote._id}`, {
         method: "put",
         headers: {
           "Content-Type": "application/json",
@@ -37,6 +37,8 @@ function QuoteDetail(props: QuoteDetailProp) {
         // send copy of todo with property
         body: JSON.stringify(newQuote),
       });
+
+      const data = await response.json();
 
       setQuote(newQuote);
 

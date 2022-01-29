@@ -22,7 +22,6 @@ const Layout: FC = (props) => {
         justifyContent="center"
         alignItems="center"
         spacing={2}
-        minHeight={"80vh"}
       >
         {props.children}
       </Stack>
