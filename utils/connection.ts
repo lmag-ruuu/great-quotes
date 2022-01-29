@@ -15,7 +15,7 @@ export const connect = async () => {
   });
 
   const quotes =
-    mongoose.models.quotes || mongoose.model("Quotes", quotesSchema);
+    mongoose.models.quotes || mongoose.model("quotes", quotesSchema);
 
   return { conn, quotes };
 };
