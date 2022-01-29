@@ -110,7 +110,8 @@ function QuoteDetail(props: QuoteDetailProp) {
 export async function getServerSideProps(context: any) {
   const quoteId = context.query.id;
   // get todo data from API
-  const url = process.env.MONGODB_URI ? process.env.MONGODB_URI : "";
+  const url =
+    "mongodb+srv://ruben:Gf0UD4JuZwp5Wtgb@cluster0.ejlc8.mongodb.net/quotesDB?retryWrites=true&w=majority";
   const client = new MongoClient(url);
   const quotes: Array<quote> = [];
   let finded: quote;

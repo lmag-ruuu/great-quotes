@@ -13,7 +13,6 @@ const Layout: FC = (props) => {
         borderRadius: "8px",
         padding: "28px",
         justifyContent: "space-between",
-        height: "100vh",
       }}
     >
       <NavBar />
@@ -23,6 +22,7 @@ const Layout: FC = (props) => {
         justifyContent="center"
         alignItems="center"
         spacing={2}
+        minHeight={"80vh"}
       >
         {props.children}
       </Stack>
