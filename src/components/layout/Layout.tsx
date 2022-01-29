@@ -13,6 +13,7 @@ const Layout: FC = (props) => {
         borderRadius: "8px",
         padding: "28px",
         justifyContent: "space-between",
+        height: "100vh",
       }}
     >
       <NavBar />
