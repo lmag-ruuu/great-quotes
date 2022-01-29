@@ -1,7 +1,12 @@
 import { useState } from "react";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { quote } from "../../utils/types";
+import Paper from "@mui/material/Paper";
+import SendIcon from "@mui/icons-material/Send";
+import InputBase from "@mui/material/InputBase";
+import IconButton from "@mui/material/IconButton";
 
 interface QuoteDetailProp {
   quote: quote;
@@ -13,16 +18,61 @@ function QuoteDetail(props: QuoteDetailProp) {
 
   return (
     <Stack spacing={2} direction={"column"} mb={2}>
-      <Typography>
-        Aqui va detalles del quote el author seria {quote.author}
+      <Typography
+        variant="h4"
+        component="div"
+        width={{ sm: "90vw", md: "80vw" }}
+        alignSelf={"center"}
+      >
+        &quot;{props.quote.text}&quot;
       </Typography>
-      <Typography>
-        Aqui va detalles del quote el texto seria {quote.text}
+      <Typography
+        variant="body1"
+        gutterBottom
+        component="div"
+        alignSelf={"center"}
+      >
+        {props.quote.author}
       </Typography>
-      {quote.comments.map((comment, index) => (
-        <Typography key={index}>comentario: {comment}</Typography>
-      ))}
-      <Typography>Y aqui para poner y enviar un comentario xd</Typography>
+      <Box
+        sx={{
+          p: 4,
+          bgcolor: "background.default",
+          gap: 2,
+          width: { sm: "90vw", md: "80vw" },
+          alignSelf: "center",
+        }}
+      >
+        <Typography variant="body2" component="div" marginBottom={3}>
+          Comments:
+        </Typography>
+        {quote.comments.map((comment, index) => (
+          <Typography
+            sx={{ borderBottom: "2px solid #ddd", pt: 1, pb: 1 }}
+            key={index}
+          >
+            {comment}
+          </Typography>
+        ))}
+        <Paper
+          component="form"
+          sx={{
+            p: "2px 4px",
+            display: "flex",
+            alignItems: "center",
+            marginTop: 3,
+          }}
+        >
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="add comment"
+            inputProps={{ "aria-label": "add comment" }}
+          />
+          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+            <SendIcon />
+          </IconButton>
+        </Paper>
+      </Box>
     </Stack>
   );
 }
