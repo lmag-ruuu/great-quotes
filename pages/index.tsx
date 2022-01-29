@@ -20,7 +20,8 @@ function Home(props: HomeProps) {
 }
 export async function getServerSideProps() {
   // get todo data from API
-  const res = await fetch(process.env.API_URL as string);
+  const url = `${process.env.API_URL}/quotes`;
+  const res = await fetch(url);
   const quotes = await res.json();
 
   // return props
