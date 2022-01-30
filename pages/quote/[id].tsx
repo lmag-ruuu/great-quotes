@@ -29,7 +29,7 @@ function QuoteDetail(props: QuoteDetailProp) {
         comments: quote.comments.concat(commentRef.current.value),
       };
 
-      const response = await fetch(`/api/${quote._id}`, {
+      const response = await fetch(`/api/quotes/${quote._id}`, {
         method: "put",
         headers: {
           "Content-Type": "application/json",
