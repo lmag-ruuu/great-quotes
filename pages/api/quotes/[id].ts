@@ -18,7 +18,7 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
     GET: async (req: VercelRequest, res: VercelResponse) => {
       const { quotes } = await connect(); // connect to database
       const response = await quotes.findById(id).catch(catcher);
-      res.status(200).json(response);
+      res.status(200).json({ response });
     },
     // RESPONSE PUT REQUESTS
     PUT: async (req: VercelRequest, res: VercelResponse) => {
@@ -26,7 +26,7 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
       const response = await quotes
         .findByIdAndUpdate(id, req.body, { new: true })
         .catch(catcher);
-      res.status(200).json(response);
+      res.status(200).json({ response });
     },
   };
 
