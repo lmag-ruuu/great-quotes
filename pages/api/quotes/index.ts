@@ -1,33 +1,25 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { connect } from "../../../utils/connection";
-import { ResponseFuncs } from "../../../utils/types";
+import mongoDB, { MongoClient } from "mongodb";
+
+const url =
+  "mongodb+srv://ruben:Gf0UD4JuZwp5Wtgb@cluster0.ejlc8.mongodb.net/quotesDB?retryWrites=true&w=majority";
+const client = new MongoClient(url);
 
 const handler = async (req: VercelRequest, res: VercelResponse) => {
-  const method: keyof ResponseFuncs = req.method as keyof ResponseFuncs;
+  if (req.method === "POST") {
+    const data = req.body;
+    try {
+      await client.connect();
+      const db: mongoDB.Db = client.db();
+      const quotesCollection: mongoDB.Collection = db.collection("quotes");
 
-  const catcher = (error: Error) => res.status(400).json({ error });
-
-  const handleCase: ResponseFuncs = {
-    // RESPONSE FOR GET REQUESTS
-    GET: async (req: VercelRequest, res: VercelResponse) => {
-      const { quotes } = await connect(); // connect to database
-      const response = await quotes.find({}).catch(catcher);
-      res.status(200).json({ response });
-    },
-    // RESPONSE POST REQUESTS
-    POST: async (req: VercelRequest, res: VercelResponse) => {
-      const { quotes } = await connect(); // connect to database
-      const response = await quotes.create(req.body).catch(catcher);
-      res.status(200).json({ response });
-    },
-  };
-
-  const response = handleCase[method];
-
-  if (response) {
-    response(req, res);
-  } else {
-    res.status(400).json({ error: "No Response for This Request" });
+      const result = await quotesCollection.insertOne(data);
+      res.status(200).json(result);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      await client.close();
+    }
   }
 };
 

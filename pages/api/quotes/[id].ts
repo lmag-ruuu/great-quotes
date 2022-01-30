@@ -1,39 +1,30 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { connect } from "../../../utils/connection";
-import { ResponseFuncs } from "../../../utils/types";
+import mongoDB, { MongoClient } from "mongodb";
+
+const url =
+  "mongodb+srv://ruben:Gf0UD4JuZwp5Wtgb@cluster0.ejlc8.mongodb.net/quotesDB?retryWrites=true&w=majority";
+const client = new MongoClient(url);
 
 const handler = async (req: VercelRequest, res: VercelResponse) => {
-  //capture request method, we type it as a key of ResponseFunc to reduce typing later
-  const method: keyof ResponseFuncs = req.method as keyof ResponseFuncs;
+  if (req.method === "PUT") {
+    const data = req.body;
+    try {
+      await client.connect();
+      const db: mongoDB.Db = client.db();
+      const quotesCollection: mongoDB.Collection = db.collection("quotes");
 
-  //function for catch errors
-  const catcher = (error: Error) => res.status(400).json({ error });
+      const result = await quotesCollection.updateOne(
+        { _id: data._id },
+        { $set: data }
+      );
 
-  // GRAB ID FROM req.query (where next stores params)
-  const id: string = req.query.id as string;
-
-  // Potential Responses for /quotes/:id
-  const handleCase: ResponseFuncs = {
-    // RESPONSE FOR GET REQUESTS
-    GET: async (req: VercelRequest, res: VercelResponse) => {
-      const { quotes } = await connect(); // connect to database
-      const response = await quotes.findById(id).catch(catcher);
-      res.status(200).json({ response });
-    },
-    // RESPONSE PUT REQUESTS
-    PUT: async (req: VercelRequest, res: VercelResponse) => {
-      const { quotes } = await connect(); // connect to database
-      const response = await quotes
-        .findByIdAndUpdate(id, req.body, { new: true })
-        .catch(catcher);
-      res.status(200).json({ response });
-    },
-  };
-
-  // Check if there is a response for the particular method, if so invoke it, if not response with an error
-  const response = handleCase[method];
-  if (response) response(req, res);
-  else res.status(400).json({ error: "No Response for This Request" });
+      res.status(200).json(result);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      await client.close();
+    }
+  }
 };
 
 export default handler;
