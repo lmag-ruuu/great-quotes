@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 import SendIcon from "@mui/icons-material/Send";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
-import mongoDB, { MongoClient } from "mongodb";
+import mongoDB, { MongoClient, ObjectId } from "mongodb";
 
 interface QuoteDetailProp {
   quote: quote;
@@ -119,7 +119,9 @@ export async function getServerSideProps(context: any) {
     await client.connect();
     const db: mongoDB.Db = client.db("quotesDB");
     const quotesCollection: mongoDB.Collection = db.collection("quotes");
-    const results = await quotesCollection.find().toArray();
+    const results = await quotesCollection
+      .find({ _id: new ObjectId(quoteId) })
+      .toArray();
 
     results.forEach((result) =>
       quotes.push({
@@ -133,11 +135,9 @@ export async function getServerSideProps(context: any) {
     await client.close();
   }
 
-  const quote = quotes.find((quote) => quote._id === quoteId.toString());
-
   // return props
   return {
-    props: { quote },
+    props: { quote: quotes[0] },
   };
 }
 
