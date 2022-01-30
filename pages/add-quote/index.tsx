@@ -28,8 +28,6 @@ const AddQuote: FC = () => {
         comments: [],
       };
 
-      console.log(quote);
-
       await fetch("/api/quotes", {
         method: "post",
         body: JSON.stringify(quote),
@@ -37,11 +35,7 @@ const AddQuote: FC = () => {
           "Content-Type": "application/json",
         },
       });
-
       router.push("/");
-
-      textRef.current.value = "";
-      authorRef.current.value = "";
     }
   };
 
