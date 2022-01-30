@@ -4,8 +4,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "vercel dev",
+    "lint": "next lint",
+    "deploy": "vercel deploy --prod"
   },
   "dependencies": {
     "@emotion/css": "^11.7.1",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@types/node": "17.0.10",
     "@types/react": "17.0.38",
+    "@vercel/node": "^1.12.1",
     "eslint": "8.7.0",
     "eslint-config-next": "12.0.8",
     "typescript": "4.5.5"
