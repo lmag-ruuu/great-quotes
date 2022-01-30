@@ -11,12 +11,14 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
     // RESPONSE FOR GET REQUESTS
     GET: async (req: VercelRequest, res: VercelResponse) => {
       const { quotes } = await connect(); // connect to database
-      res.status(200).json(await quotes.find({}).catch(catcher));
+      const response = await quotes.find({}).catch(catcher);
+      res.status(200).json(response);
     },
     // RESPONSE POST REQUESTS
     POST: async (req: VercelRequest, res: VercelResponse) => {
       const { quotes } = await connect(); // connect to database
-      res.status(200).json(await quotes.create(req.body).catch(catcher));
+      const response = await quotes.create(req.body).catch(catcher);
+      res.status(200).json(response);
     },
   };
 
