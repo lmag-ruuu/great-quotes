@@ -30,7 +30,7 @@ function QuoteDetail(props: QuoteDetailProp) {
       };
 
       await fetch(`/api/quotes/${quote._id}`, {
-        method: "put",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },

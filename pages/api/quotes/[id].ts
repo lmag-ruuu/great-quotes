@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import mongoDB, { MongoClient } from "mongodb";
+import mongoDB, { MongoClient, ObjectId } from "mongodb";
 
 const url =
   "mongodb+srv://ruben:Gf0UD4JuZwp5Wtgb@cluster0.ejlc8.mongodb.net/quotesDB?retryWrites=true&w=majority";
@@ -14,8 +14,8 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
       const quotesCollection: mongoDB.Collection = db.collection("quotes");
 
       const result = await quotesCollection.updateOne(
-        { _id: data._id },
-        { $set: data }
+        { _id: new ObjectId(data._id) },
+        { $set: { comments: data.comments } }
       );
 
       res.status(200).json(result);
