@@ -29,7 +29,7 @@ function QuoteDetail(props: QuoteDetailProp) {
         comments: quote.comments.concat(commentRef.current.value),
       };
 
-      const response = await fetch(`/api/quotes/${quote._id}`, {
+      await fetch(`/api/quotes/${quote._id}`, {
         method: "put",
         headers: {
           "Content-Type": "application/json",
@@ -37,8 +37,6 @@ function QuoteDetail(props: QuoteDetailProp) {
         // send copy of todo with property
         body: JSON.stringify(newQuote),
       });
-
-      const data = await response.json();
 
       setQuote(newQuote);
 
@@ -116,7 +114,6 @@ export async function getServerSideProps(context: any) {
     "mongodb+srv://ruben:Gf0UD4JuZwp5Wtgb@cluster0.ejlc8.mongodb.net/quotesDB?retryWrites=true&w=majority";
   const client = new MongoClient(url);
   const quotes: Array<quote> = [];
-  let finded: quote;
 
   try {
     await client.connect();
