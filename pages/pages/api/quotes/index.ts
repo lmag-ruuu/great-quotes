@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { connect } from "../../../utils/connection";
-import { ResponseFuncs } from "../../../utils/types";
+import { connect } from "../../../../utils/connection";
+import { ResponseFuncs } from "../../../../utils/types";
 
 const handler = async (req: VercelRequest, res: VercelResponse) => {
   const method: keyof ResponseFuncs = req.method as keyof ResponseFuncs;

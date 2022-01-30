@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { connect } from "../../../utils/connection";
-import { ResponseFuncs } from "../../../utils/types";
+import { connect } from "../../../../utils/connection";
+import { ResponseFuncs } from "../../../../utils/types";
 
 const handler = async (req: VercelRequest, res: VercelResponse) => {
   //capture request method, we type it as a key of ResponseFunc to reduce typing later
