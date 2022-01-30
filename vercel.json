@@ -1,16 +1,1 @@
-{
-  "name": "quotes",
-  "version": 2,
-  "builds": [
-    {
-      "src": "/api/quotes",
-      "use": "@vercel/quotes"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/quotes/(?<id>)",
-      "dest": "/api/quotes?id=$id"
-    }
-  ]
-}
+{}

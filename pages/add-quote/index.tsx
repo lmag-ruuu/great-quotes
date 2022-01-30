@@ -30,15 +30,13 @@ const AddQuote: FC = () => {
 
       console.log(quote);
 
-      const response = await fetch("/api/quotes", {
+      await fetch("/api/quotes", {
         method: "post",
         body: JSON.stringify(quote),
         headers: {
           "Content-Type": "application/json",
         },
       });
-
-      const data = await response.json();
 
       router.push("/");
 
