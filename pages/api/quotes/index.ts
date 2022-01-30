@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { connect } from "../../utils/connection";
-import { ResponseFuncs } from "../../utils/types";
+import { connect } from "../../../utils/connection";
+import { ResponseFuncs } from "../../../utils/types";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const method: keyof ResponseFuncs = req.method as keyof ResponseFuncs;
