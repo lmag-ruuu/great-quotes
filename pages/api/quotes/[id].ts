@@ -17,16 +17,18 @@ const handler = async (req: VercelRequest, res: VercelResponse) => {
     // RESPONSE FOR GET REQUESTS
     GET: async (req: VercelRequest, res: VercelResponse) => {
       const { quotes } = await connect(); // connect to database
-      res.json(await quotes.findById(id).catch(catcher));
+      res.status(200).json(await quotes.findById(id).catch(catcher));
     },
     // RESPONSE PUT REQUESTS
     PUT: async (req: VercelRequest, res: VercelResponse) => {
       const { quotes } = await connect(); // connect to database
-      res.json(
-        await quotes
-          .findByIdAndUpdate(id, req.body, { new: true })
-          .catch(catcher)
-      );
+      res
+        .status(200)
+        .json(
+          await quotes
+            .findByIdAndUpdate(id, req.body, { new: true })
+            .catch(catcher)
+        );
     },
   };
 
