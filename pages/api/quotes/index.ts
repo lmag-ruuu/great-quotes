@@ -1,20 +1,20 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { connect } from "../../../utils/connection";
 import { ResponseFuncs } from "../../../utils/types";
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: VercelRequest, res: VercelResponse) => {
   const method: keyof ResponseFuncs = req.method as keyof ResponseFuncs;
 
   const catcher = (error: Error) => res.status(400).json({ error });
 
   const handleCase: ResponseFuncs = {
     // RESPONSE FOR GET REQUESTS
-    GET: async (req: NextApiRequest, res: NextApiResponse) => {
+    GET: async (req: VercelRequest, res: VercelResponse) => {
       const { quotes } = await connect(); // connect to database
       res.json(await quotes.find({}).catch(catcher));
     },
     // RESPONSE POST REQUESTS
-    POST: async (req: NextApiRequest, res: NextApiResponse) => {
+    POST: async (req: VercelRequest, res: VercelResponse) => {
       const { quotes } = await connect(); // connect to database
       res.json(await quotes.create(req.body).catch(catcher));
     },
