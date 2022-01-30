@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 import SendIcon from "@mui/icons-material/Send";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
-import mongoDB, { MongoClient, ObjectId } from "mongodb";
+import mongoDB, { MongoClient } from "mongodb";
 
 interface QuoteDetailProp {
   quote: quote;

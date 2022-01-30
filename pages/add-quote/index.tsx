@@ -28,7 +28,7 @@ const AddQuote: FC = () => {
         comments: [],
       };
 
-      await fetch("/api/quotes", {
+      await fetch("api/quotes", {
         method: "post",
         body: JSON.stringify(quote),
         headers: {
