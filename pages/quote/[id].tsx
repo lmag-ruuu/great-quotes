@@ -23,7 +23,7 @@ function QuoteDetail(props: QuoteDetailProp) {
     event.preventDefault();
 
     //create new comment
-    if (commentRef.current) {
+    if (commentRef.current && commentRef.current.value.trim() !== "") {
       let newQuote: quote = {
         ...quote,
         comments: quote.comments.concat(commentRef.current.value),
