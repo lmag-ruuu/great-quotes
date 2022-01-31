@@ -1,8 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import mongoDB, { MongoClient, ObjectId } from "mongodb";
 
-const url =
-  "mongodb+srv://ruben:Gf0UD4JuZwp5Wtgb@cluster0.ejlc8.mongodb.net/quotesDB?retryWrites=true&w=majority";
+const url = process.env.MONGODB_URI ? process.env.MONGODB_URI : "";
 const client = new MongoClient(url);
 
 const handler = async (req: VercelRequest, res: VercelResponse) => {
