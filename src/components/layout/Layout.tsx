@@ -2,12 +2,11 @@ import { FC } from "react";
 import { Stack, Container, Divider } from "@mui/material";
 import NavBar from "../navigation/NavBar";
 import Footer from "../footer/Footer";
-import { height } from "@mui/system";
 
 const Layout: FC = (props) => {
   return (
     <Container
-      maxWidth="lg"
+      maxWidth={false}
       sx={{
         bgcolor: "#e3fafc",
         borderRadius: "8px",
